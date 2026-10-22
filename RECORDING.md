@@ -11,7 +11,7 @@ related_to: ["[[applications/_portfolio/game-ad-factory/EXTENSION]]", "[[applica
 
 ## 준비
 
-1. 맥 터미널에서 저장소를 받는다(처음 한 번): `git clone https://github.com/ljhljh0703-cmd/ad-factory ~/ad-factory`. 비공개 저장소라 깃허브 로그인이 된 상태여야 한다.
+1. 맥 터미널에서 저장소를 받는다(처음 한 번): `git clone https://github.com/ljhljh0703-cmd/ad-factory ~/ad-factory`. 공개 저장소라 받기는 로그인 없이 되고, 앱의 「클라우드에 맡기기」(올리기)는 깃허브 로그인이 필요하다.
 2. Code 탭(또는 claude.ai/code)에서 저장소 ad-factory 로 세션을 하나 열어 둔다.
 3. 수집기 열쇠: Vercel jelly-panic-collector → Settings → Environment Variables → EXPORT_KEY 값을 `~/.adf-export-key` 파일에 한 줄로 넣는다(성과 장면에만 필요).
 4. `~/ad-factory/app/start-app.command` 를 두 번 클릭한다. 첫 실행은 부품 받기로 1~2분. 창에 「AI: 클라우드 세션이 답합니다」가 뜨면 준비 끝.
