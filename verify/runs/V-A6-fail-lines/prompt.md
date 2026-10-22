@@ -1,6 +1,6 @@
 너는 광고 대본과 실제 녹화 화면을 맞춰 보는 검수자다. 대본에 적힌 장면이 녹화 화면에 그대로 있는지만 본다.
 화면은 아래 시트 이미지들이다. 녹화본을 1초마다 자른 프레임이 시트 한 장에 8개씩, 왼쪽 아래에 몇 초 화면인지 적혀 있다.
-시트: /tmp/claude-0/-home-claude/6c86ea7d-4219-589a-a167-3933d0cd1785/scratchpad/verify/runs/V-A6-fail-lines/sheet_01.png, /tmp/claude-0/-home-claude/6c86ea7d-4219-589a-a167-3933d0cd1785/scratchpad/verify/runs/V-A6-fail-lines/sheet_02.png, /tmp/claude-0/-home-claude/6c86ea7d-4219-589a-a167-3933d0cd1785/scratchpad/verify/runs/V-A6-fail-lines/sheet_03.png
+시트: /home/claude/ad-factory/verify/runs/V-A6-fail-lines/sheet_01.png, /home/claude/ad-factory/verify/runs/V-A6-fail-lines/sheet_02.png
 
 ## 대본 (R04-02, 답답한 플레이)
 컷 0(첫 컷): 실제 화면. 보드가 거의 다 찼고 아기 쿠키가 오른쪽에 있음, 아래 조각 자리에 두 칸짜리 주황 조각

@@ -1,9 +1,9 @@
 {
- "video": "../ua/ads/A5-fail-crow.mp4",
+ "video": "/home/claude/ad-factory/ua/ads/A5-fail-crow.mp4",
  "fps": 1,
  "frames": 10,
  "sheets": [
-  "runs/V-A5-fail-crow/sheet_01.png",
-  "runs/V-A5-fail-crow/sheet_02.png"
+  "/home/claude/ad-factory/verify/runs/V-A5-fail-crow/sheet_01.png",
+  "/home/claude/ad-factory/verify/runs/V-A5-fail-crow/sheet_02.png"
  ]
 }

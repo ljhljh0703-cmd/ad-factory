@@ -1,9 +1,11 @@
 {
- "video": "../ua/ads/A4-world.mp4",
- "fps": 1,
- "frames": 14,
+ "video": "/home/claude/ad-factory/ua/ads/A4-world.mp4",
+ "fps": 2,
+ "frames": 27,
  "sheets": [
-  "runs/V-A4-world/sheet_01.png",
-  "runs/V-A4-world/sheet_02.png"
+  "/home/claude/ad-factory/verify/runs/V-A4-world/sheet_01.png",
+  "/home/claude/ad-factory/verify/runs/V-A4-world/sheet_02.png",
+  "/home/claude/ad-factory/verify/runs/V-A4-world/sheet_03.png",
+  "/home/claude/ad-factory/verify/runs/V-A4-world/sheet_04.png"
  ]
 }

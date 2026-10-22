@@ -1,8 +1,8 @@
 {
- "video": "../ua/ads/A1-flip.mp4",
+ "video": "/home/claude/ad-factory/ua/ads/A1-flip.mp4",
  "fps": 1,
  "frames": 7,
  "sheets": [
-  "runs/V-A1-flip/sheet_01.png"
+  "/home/claude/ad-factory/verify/runs/V-A1-flip/sheet_01.png"
  ]
 }

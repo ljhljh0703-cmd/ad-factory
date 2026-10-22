@@ -1,8 +1,8 @@
 {
- "video": "../ua/ads/A2-open.mp4",
+ "video": "/home/claude/ad-factory/ua/ads/A2-open.mp4",
  "fps": 1,
  "frames": 8,
  "sheets": [
-  "runs/V-A2-open/sheet_01.png"
+  "/home/claude/ad-factory/verify/runs/V-A2-open/sheet_01.png"
  ]
 }

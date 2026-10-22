@@ -70,6 +70,21 @@ def ring(canvas, rec, cells, text="여기!"):
         f = ImageFont.truetype(FONT_B, 44); tb = d.textbbox((0, 0), text, font=f); tw = tb[2] - tb[0]
         tx = min(max(X0 + (X1 - X0 - tw) / 2, 30), W - tw - 30); ty = Y0 - 70 if Y0 > 450 else Y1 + 14
         d.rounded_rectangle((tx - 16, ty - 6, tx + tw + 16, ty + 58), 20, fill=PINK); d.text((tx, ty), text, font=f, fill=(255, 255, 255))
+    return (X0, Y0 - 80, X1, Y1 + 80)
+
+
+# ── 자막 자리(작가 결정 10-22): 위쪽은 쇼츠·릴스 앱 버튼과 겹치고 잘 안 보여서 판 아래쪽 진한 띠가 기본.
+#    표시(여기!)·지켜야 할 칸과 겹치면 판 위쪽으로 옮긴다. 자막마다 "pos": "high"|"low" 또는 "y" 로 정할 수 있다.
+CAP_LOW, CAP_HIGH, CAP_SIZE = 1150, 640, 84
+CAP_STYLE = dict(size=CAP_SIZE, color=(255, 255, 255), fill=(74, 46, 23, 235))
+def cap_height(text): return (CAP_SIZE + 16) * len(text.split("\n")) + 44
+def cap_y(c, avoid):
+    if "y" in c: return c["y"]
+    if "_y" in c and not avoid: return c["_y"]
+    if c.get("pos") == "high": return CAP_HIGH
+    if c.get("pos") == "low": return CAP_LOW
+    lo = (CAP_LOW, CAP_LOW + cap_height(c["text"]))
+    return CAP_HIGH if any(not (a[3] < lo[0] or a[1] > lo[1]) for a in avoid) else CAP_LOW
 
 # ── 소리: 게임이 낸 음을 같은 값으로 합성 ──
 def osc(kind, ph):
@@ -101,6 +116,7 @@ def ring_box(canvas, rec, box, text=""):
         f = ImageFont.truetype(FONT_B, 44); tb = d.textbbox((0, 0), text, font=f); tw = tb[2] - tb[0]
         d.rounded_rectangle(((X0 + X1) / 2 - tw / 2 - 20, Y1 + 10, (X0 + X1) / 2 + tw / 2 + 20, Y1 + 80), 30, fill=PINK)
         d.text(((X0 + X1) / 2 - tw / 2, Y1 + 14), text, font=f, fill=(255, 255, 255))
+    return (X0, Y0 - 20, X1, Y1 + 90)
 
 def render(spec, out):
     global GAME_BOX
@@ -141,8 +157,7 @@ def render(spec, out):
     p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", wav,
                           "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", out], stdin=subprocess.PIPE)
     cache = {}
-    for k, fr in enumerate(frames):
-        t = k / FPS
+    def compose(fr):
         if fr[0] == "game":
             key = (fr[1], fr[2])
             if key not in cache: cache.clear(); c = BG.copy(); place_game(c, R(fr[1]).img(fr[2])); cache[key] = c
@@ -162,13 +177,29 @@ def render(spec, out):
             veil = Image.new("RGBA", (W, H), (255, 248, 240, 200)); canvas.paste(veil, (0, 0), veil)
             caption(canvas, fr[1], y=760, size=92, color=PINK, fill=(255, 255, 255, 0))
             if fr[2]: caption(canvas, fr[2], y=920, size=56, fill=(255, 255, 255, 0))
+        return canvas
+    # 자막 자리 고르기: 자막이 떠 있는 동안 화면에서 움직이는 곳(조각 놓기·줄 터짐·판 끝 창)을 덜 가리는 쪽(판 아래쪽/위쪽)
+    import numpy as _np
+    def motion_cost(c, y):
+        h = cap_height(c["text"]); k0 = max(int(c["t0"] * FPS) - 3, 0); k1 = min(int(c["t1"] * FPS), len(frames) - 1)
+        ks = list(range(k0, k1 + 1, 3)) or [k0]
+        arr = [_np.asarray(compose(frames[k]).convert("L"), dtype=_np.int16)[y:y + h] for k in ks]
+        return sum(int((_np.abs(arr[i + 1] - arr[i]) > 24).sum()) for i in range(len(arr) - 1))
+    for c in caps:
+        if c.get("kind") in (None, "caption") and "y" not in c and "pos" not in c:
+            lo, hi = motion_cost(c, CAP_LOW), motion_cost(c, CAP_HIGH)
+            c["_y"] = CAP_HIGH if hi < lo * 0.7 else CAP_LOW
+    for k, fr in enumerate(frames):
+        t = k / FPS
+        canvas = compose(fr)
         canvas = canvas.convert("RGBA")
-        for c in caps:
-            if c["t0"] <= t < c["t1"]:
-                if c.get("kind") == "ring": ring(canvas, R(c["rec"]), c["cells"], c.get("text", "여기!"))
-                elif c.get("kind") == "ring_box": ring_box(canvas, R(c["rec"]), c["box"], c.get("text", ""))
-                elif c.get("kind") == "label": label(canvas, c["text"], (W - 360, 1700) if c.get("pos") == "br" else (60, 1700))
-                else: caption(canvas, c["text"], y=c.get("y", 130))
+        live = [c for c in caps if c["t0"] <= t < c["t1"]]; avoid = []
+        for c in live:
+            if c.get("kind") == "ring": avoid.append(ring(canvas, R(c["rec"]), c["cells"], c.get("text", "여기!")))
+            elif c.get("kind") == "ring_box": avoid.append(ring_box(canvas, R(c["rec"]), c["box"], c.get("text", "")) or (0, 0, 0, 0))
+            elif c.get("kind") == "label": label(canvas, c["text"], (W - 360, 1700) if c.get("pos") == "br" else (60, 1700))
+        for c in live:
+            if c.get("kind") in (None, "caption"): caption(canvas, c["text"], y=cap_y(c, avoid), **CAP_STYLE)
         p.stdin.write(canvas.convert("RGB").tobytes())
     p.stdin.close(); p.wait(); os.remove(wav)
     print(out, f"{total:.1f}s", len(frames), "frames", len(sounds), "sounds")
