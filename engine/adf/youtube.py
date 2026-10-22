@@ -12,7 +12,8 @@ import json, os, urllib.parse, urllib.request
 
 from . import paths
 
-SCOPES = ["https://www.googleapis.com/auth/youtube.upload", "https://www.googleapis.com/auth/youtube.readonly",
+# 공개 범위 바꾸기(videos.update)는 upload 권한으로 안 됨(10-22 403) → youtube 관리 권한
+SCOPES = ["https://www.googleapis.com/auth/youtube.upload", "https://www.googleapis.com/auth/youtube",
           "https://www.googleapis.com/auth/yt-analytics.readonly"]
 REDIRECT = "http://localhost:8765/"
 CHANNEL_ID = "UCClbeVRufxz-skvVC6OFPQQ"  # 「젤리 패닉」 채널(작가 계정, 10-22 이름 바꿔 씀)

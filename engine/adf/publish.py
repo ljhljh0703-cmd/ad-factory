@@ -165,12 +165,24 @@ UPLOADERS = {"youtube": _not_ready, "instagram": _not_ready}
 def make_public(rid, who):
     """비공개로 올린 영상을 사람 이름으로 공개 전환(작가가 폰에서 확인한 뒤)."""
     r = _load(rid)
-    if r["상태"] != "게시됨(비공개)": raise ValueError(f"공개로 바꿀 수 없는 상태: {r['상태']}")
+    if r["상태"] not in ("게시됨(비공개)", "게시됨(일부공개)"): raise ValueError(f"공개로 바꿀 수 없는 상태: {r['상태']}")
     if not who or who in ("AI", "엔진"): raise ValueError("공개 전환은 사람 이름으로만")
     from . import youtube
     st = youtube.set_privacy(r["게시"]["영상_id"], "public")
     r["상태"] = "게시됨"; r["게시"]["공개"] = st; r["공개_승인"] = {"누가": who, "때": now()}; _save(r)
     audit("공개", 요청=rid, 누가=who, 영상=r["게시"]["영상_id"])
+    return r
+
+
+def make_unlisted(rid, who):
+    """비공개 영상을 일부 공개(링크 아는 사람만)로. 폰에서 채널 로그인 없이 확인할 때."""
+    r = _load(rid)
+    if r["상태"] != "게시됨(비공개)": raise ValueError(f"일부 공개로 바꿀 수 없는 상태: {r['상태']}")
+    if not who or who in ("AI", "엔진"): raise ValueError("사람 이름으로만")
+    from . import youtube
+    st = youtube.set_privacy(r["게시"]["영상_id"], "unlisted")
+    r["상태"] = "게시됨(일부공개)"; r["게시"]["공개"] = st; r["일부공개_승인"] = {"누가": who, "때": now()}; _save(r)
+    audit("일부공개", 요청=rid, 누가=who, 영상=r["게시"]["영상_id"])
     return r
 
 

@@ -71,6 +71,7 @@ def main(argv):
         if sub == "request": out = publish.request(a["ad"], channel=a.get("channel"))
         elif sub == "withdraw": out = publish.withdraw(a["id"], a.get("why", ""))
         elif sub == "public": out = publish.make_public(a["id"], a.get("who"))
+        elif sub == "unlisted": out = publish.make_unlisted(a["id"], a.get("who"))
         elif sub == "approve": out = publish.approve(a["id"], a.get("who"), a.get("note", ""))
         elif sub == "run": out = publish.run(a["id"])
         elif sub == "audit": out = publish.verify_audit()
