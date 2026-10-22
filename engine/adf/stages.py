@@ -51,10 +51,10 @@ def sh(job, cmd, cwd=None, timeout=3600):
 @stage("대본.요청문")
 def gen_build(job, run, per_type=2, game="jelly-panic"):
     g = legacy("generate", "generator/generate.py")
-    quiet(job, g.build, run, per_type)
-    for f, r in [(g.FACTS, "사실표"), (g.CRITERIA, "기준표")]: job.input(f, r)
+    quiet(job, g.build, run, per_type, game)
+    for f, r in [(g.facts_path(game), "사실표"), (g.CRITERIA, "기준표")]: job.input(f, r)
     job.output(paths.p("generator", "runs", run, "prompt.md"), "요청문")
-    return {"회차": run}
+    return {"회차": run, "게임": game}
 
 
 @stage("대본.생성")
@@ -81,14 +81,15 @@ def gen_ingest(job, run):
 
 # ───────────── 심사 ─────────────
 @stage("심사.요청문")
-def judge_prompt(job, run, set="dev"):
+def judge_prompt(job, run, set="dev", game=None):
     j = legacy("judge", "judge/judge.py")
-    quiet(job, j.prompt, run, set)
-    for f, r in [("CRITERIA.md", "기준표"), ("game/jelly-panic.json", "사실표"), (f"judge/prompts/{j.PROMPT_VER}.md", "요청문 틀")]:
+    game = game or j.set_game(set)
+    quiet(job, j.prompt, run, set, game)
+    for f, r in [("CRITERIA.md", "기준표"), (f"game/{game}.json", "사실표"), (f"judge/prompts/{j.PROMPT_VER}.md", "요청문 틀")]:
         job.input(paths.p(f), r)
     d = paths.p("judge", "runs", run)
     job.output(os.path.join(d, "prompt.md"), "요청문"); job.output(os.path.join(d, "rules.jsonl"), "① 규칙 결과")
-    return {"회차": run, "묶음": set}
+    return {"회차": run, "묶음": set, "게임": game}
 
 
 @stage("심사.AI판정")

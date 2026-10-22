@@ -74,3 +74,13 @@ cd ../app && xvfb-run -a node test/smoke.mjs        # 앱 화면
 ## 단계 넣기
 
 `adf/stages.py` 에 `@stage("이름")` 함수 하나를 더한다. 입력은 `job.input`, 산출은 `job.output` 으로 남기고, 관문에 걸리면 `Blocked`, 사람이나 외부 응답을 기다리면 `Wait` 를 던진다. 같은 작업을 다시 돌려도 결과가 같게 쓴다.
+
+## 공개용 묶음과 기록판
+
+`python3 -m adf export` 가 엔진 기록을 공개용 묶음 하나(`board/data.json`, 같은 내용의 `data.js`)로 내보낸다. 읽기 전용 기록판(`board/index.html`)은 이 묶음만 읽는다. 나중에 서버를 두면 서버가 같은 꼴(adf-board/1)을 돌려주면 화면은 그대로 쓴다.
+
+- 넣는 것: 심사 회차별 숫자(score.json 그대로), 회귀 감시 결과, 생성 소재별 AI 판정과 사유, 사람이 붙인 정답·검토 결과, 게시 요청 점검, 게시 기록 온전함
+- 넣지 않는 것: 승인·처리한 사람 이름, 열쇠·토큰, 게시가 허락되지 않은 게임(지금은 보석타워)
+- 회차 설명 한 줄은 `board/notes.json` 에 적는다. 숫자는 적지 않는다(화면이 기록에서 읽음)
+- 시험: `python3 tests/test_export.py`
+- 단계를 끝낼 때마다 다시 내보내고, 공개 케이스 페이지 사본의 `ad-factory/board/` 에 세 파일을 복사한다. 올리기는 작가 「올려」 뒤

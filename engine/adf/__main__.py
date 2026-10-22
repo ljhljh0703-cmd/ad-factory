@@ -73,6 +73,9 @@ def main(argv):
         elif sub == "run": out = publish.run(a["id"])
         elif sub == "audit": out = publish.verify_audit()
         else: out = publish.requests()
+    elif cmd == "export":
+        from . import export
+        out = export.build(kv(rest).get("out"))
     elif cmd == "dashboard":
         from . import regress, review, publish, factcheck, paths as P
         import glob as G

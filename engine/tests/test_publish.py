@@ -14,6 +14,9 @@ def adf(*a):
     r = subprocess.run([sys.executable, "-m", "adf", *a, "--json"], cwd=ENG, env=env, capture_output=True, text=True)
     return (json.loads(r.stdout) if r.returncode == 0 else r.stderr.strip().splitlines()[-1])
 rid = adf("publish", "request", "ad=A1-flip")["id"]
+with open(os.path.join(tmp, "ua/ads/A1-flip.mp4"), "ab") as f: f.write(b"y")       # 요청 뒤 승인 전에 영상이 바뀜
+assert "게시 요청부터" in adf("publish", "approve", f"id={rid}", "who=시험")
+rid = adf("publish", "request", "ad=A1-flip")["id"]                               # 다시 요청하면 지금 파일로 점검
 assert "승인 없이" in adf("publish", "run", f"id={rid}")
 assert "사람 이름" in adf("publish", "approve", f"id={rid}", "who=AI")
 assert adf("publish", "approve", f"id={rid}", "who=시험")["상태"] == "승인"

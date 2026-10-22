@@ -75,8 +75,11 @@ def check(spec, request_text):
     elif g not in gs: issues.append(f"어댑터가 없는 게임: {g}. 먼저 게임 어댑터를 붙여야 합니다")
     else:
         pub = gs[g].get("광고_게시", {})
-        if g != "jelly-panic": issues.append(f"대본 생성기가 아직 {gs[g]['이름']} 사실표를 읽지 못합니다(생성기 게임 분리는 다음 일)")
+        if not os.path.exists(paths.p("game", f"{g}.json")): issues.append(f"{gs[g]['이름']} 사실표(game/{g}.json)가 없어 대본을 만들 수 없습니다")
         if not pub.get("가능", True): issues.append(f"{gs[g]['이름']}: 게시 불가로 표시된 게임({pub.get('메모')}). 내부 시험용 대본만 만들고 게시 단계는 막습니다")
+    if g in gs and "세계관 도입 → 실제 플레이" in (spec.get("유형") or {}) and os.path.exists(paths.p("game", f"{g}.json")) \
+            and not json.load(open(paths.p("game", f"{g}.json"), encoding="utf-8")).get("광고_세계관"):
+        issues.append(f"{gs[g]['이름']}는 광고 세계관이 정해지지 않아 세계관 도입 유형을 만들 수 없습니다(작가 결정 필요)")
     bad_types = [t for t in (spec.get("유형") or {}) if t not in TYPES]
     if bad_types: issues.append(f"기준표에 없는 유형: {bad_types}")
     bad_ch = [c for c in (spec.get("채널") or []) if c not in CHANNELS]
@@ -88,13 +91,13 @@ def check(spec, request_text):
     if spec.get("유료_집행"): needs_approval.append("유료 집행: 금액·계정 연결은 사람이 승인해야 시작합니다")
     if spec.get("유료_집행") is None: asks.append("무료 게시만 하나요, 유료 집행도 하나요?")
     return {"문제": issues, "물어볼_것": list(dict.fromkeys(asks)), "확인하면_좋은_것": soft, "승인_필요": needs_approval,
-            "진행": not asks and not any(k in i for i in issues for k in ("어댑터가 없는", "기준표에 없는", "모르는 채널", "생성기가 아직", "게시 불가"))}
+            "진행": not asks and not any(k in i for i in issues for k in ("어댑터가 없는", "기준표에 없는", "모르는 채널", "사실표(game/", "광고 세계관이 정해지지"))}
 
 
 def enqueue(spec, run):
     total = int(spec.get("총_개수") or sum(int(v) for v in (spec.get("유형") or {}).values()) or 6)
     per = max(1, round(total / max(1, len(spec.get("유형") or TYPES[:6]))))
-    a = pipelines.enqueue("대본", {"run": run, "per_type": per}, note=f"기획에서 {spec.get('목표', '')}")
+    a = pipelines.enqueue("대본", {"run": run, "per_type": per, "game": spec["게임"]}, note=f"기획에서 {spec.get('목표', '')}")
     b = pipelines.PIPELINES["생성분심사"]
     js = pipelines.enqueue("생성분심사", {"game": spec["게임"], "run": "J" + run, "set": run}, note="기획에서")
     js[0].d["앞_작업"] = [a[-1].id]; js[0].save()

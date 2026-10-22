@@ -93,6 +93,13 @@ def approve(rid, who, note=""):
     r = _load(rid)
     if r["상태"] != "승인대기": raise ValueError(f"승인할 수 없는 상태: {r['상태']}")
     if not who or who in ("AI", "엔진"): raise ValueError("승인은 사람 이름으로만")
+    video = paths.p(r["영상"])
+    posts = json.load(open(paths.p("ua", "ads", "posts.json"), encoding="utf-8"))
+    now_post = hashlib.sha256(json.dumps(posts[r["광고"]], ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+    if not os.path.exists(video) or _sha(video) != r["영상_해시"] or now_post != r["글_해시"]:
+        # 점검은 요청 때 파일로 했다. 그 뒤 바뀐 파일을 승인하면 점검 안 된 것을 승인하게 된다(10-22 녹화 리허설에서 발견)
+        audit("막음", 요청=rid, 이유="요청 뒤 영상이나 글이 바뀜(승인 전)")
+        raise ValueError("요청 뒤 영상이나 글이 바뀌었습니다. 게시 요청부터 다시 하세요")
     r.update({"상태": "승인", "승인": {"누가": who, "때": now(), "메모": note, "영상_해시": r["영상_해시"], "글_해시": r["글_해시"]}})
     _save(r); audit("승인", 요청=rid, 누가=who, 영상_해시=r["영상_해시"][:16])
     return r
