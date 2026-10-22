@@ -1,0 +1,7 @@
+{
+ "run": "R01",
+ "per_type": 2,
+ "made": "2026-10-21T22:09:51",
+ "facts": "game/jelly-panic.json",
+ "criteria": "CRITERIA.md"
+}

@@ -1,0 +1,9 @@
+{
+ "video": "../ua/ads/A5-fail-crow.mp4",
+ "fps": 1,
+ "frames": 10,
+ "sheets": [
+  "runs/V-A5-fail-crow/sheet_01.png",
+  "runs/V-A5-fail-crow/sheet_02.png"
+ ]
+}

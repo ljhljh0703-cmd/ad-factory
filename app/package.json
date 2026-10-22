@@ -1,0 +1,10 @@
+{
+  "name": "ad-factory-studio",
+  "productName": "광고 공장",
+  "version": "0.1.0",
+  "private": true,
+  "description": "게임 광고 기획·제작·심사·게시 승인·성과 보고를 한 곳에서. 엔진(python -m adf)을 부르는 얇은 화면",
+  "main": "main.js",
+  "scripts": { "start": "electron .", "test": "node test/smoke.mjs" },
+  "devDependencies": { "electron": "33.2.1" }
+}

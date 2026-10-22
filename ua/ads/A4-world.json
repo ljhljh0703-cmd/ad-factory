@@ -1,0 +1,83 @@
+{
+ "segments": [
+  {
+   "type": "book",
+   "image": "/mnt/user-data/uploads/Sub brain/applications/_portfolio/game-ad-factory/art/worldbook/jellypanic_R02-11_p1.png",
+   "dur": 2.2
+  },
+  {
+   "type": "book",
+   "image": "/mnt/user-data/uploads/Sub brain/applications/_portfolio/game-ad-factory/art/worldbook/jellypanic_R02-11_p2.png",
+   "dur": 2.0
+  },
+  {
+   "type": "book",
+   "image": "/mnt/user-data/uploads/Sub brain/applications/_portfolio/game-ad-factory/art/worldbook/jellypanic_R02-11_p3.png",
+   "dur": 2.0
+  },
+  {
+   "type": "pageturn",
+   "image": "/mnt/user-data/uploads/Sub brain/applications/_portfolio/game-ad-factory/art/worldbook/jellypanic_R02-11_p3.png",
+   "rec": "rec118",
+   "frame": 140,
+   "dur": 0.6
+  },
+  {
+   "type": "clip",
+   "rec": "rec118",
+   "from": 140,
+   "to": 262
+  },
+  {
+   "type": "hold",
+   "rec": "rec118",
+   "frame": 262,
+   "dur": 0.8
+  },
+  {
+   "type": "end",
+   "rec": "rec118",
+   "frame": 140,
+   "dur": 2.0,
+   "text": "아기 쿠키를 지켜 줘",
+   "sub": "프로필 링크에서 한 판"
+  }
+ ],
+ "captions": [
+  {
+   "t0": 0,
+   "t1": 2.2,
+   "text": "젤리 패닉\n아기 쿠키가 태어났어요"
+  },
+  {
+   "t0": 2.2,
+   "t1": 4.2,
+   "text": "도둑까마귀가\n아기를 노린다"
+  },
+  {
+   "t0": 4.2,
+   "t1": 6.2,
+   "text": "시럽과 균열이\n마을로 번진다"
+  },
+  {
+   "t0": 6.2,
+   "t1": 7.6,
+   "text": "실제 게임 화면"
+  },
+  {
+   "t0": 7.6,
+   "t1": 7.9,
+   "text": "아기 옆에 까마귀 예고"
+  },
+  {
+   "t0": 7.9,
+   "t1": 9.13,
+   "text": "아기가 든 줄을 지우면"
+  },
+  {
+   "t0": 9.13,
+   "t1": 11.67,
+   "text": "구출!"
+  }
+ ]
+}

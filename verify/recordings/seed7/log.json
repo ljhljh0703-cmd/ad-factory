@@ -1,0 +1,1456 @@
+{
+ "seed": 7,
+ "video": "/tmp/claude-0/-home-claude/6c86ea7d-4219-589a-a167-3933d0cd1785/scratchpad/rec/s7/07e9514aac36b4117abe85cb2b0df6db.webm",
+ "moves": [
+  {
+   "i": 0,
+   "t_ms": 1808,
+   "move": "slot0@0,0",
+   "score": 1,
+   "over": false,
+   "cause": null,
+   "placements": 1,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 1,
+   "sync": true
+  },
+  {
+   "i": 1,
+   "t_ms": 2799,
+   "move": "slot2@0,1",
+   "score": 4,
+   "over": false,
+   "cause": null,
+   "placements": 2,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 4,
+   "sync": true
+  },
+  {
+   "i": 2,
+   "t_ms": 3705,
+   "move": "slot1@0,2",
+   "score": 8,
+   "over": false,
+   "cause": null,
+   "placements": 3,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 4,
+     "c": 5,
+     "cd": 3
+    }
+   ],
+   "uiScore": 8,
+   "sync": true
+  },
+  {
+   "i": 3,
+   "t_ms": 4632,
+   "move": "slot0@0,6",
+   "score": 22,
+   "over": false,
+   "cause": null,
+   "placements": 4,
+   "tier": 1,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 4,
+     "c": 5,
+     "cd": 2
+    }
+   ],
+   "uiScore": 22,
+   "sync": true
+  },
+  {
+   "i": 4,
+   "t_ms": 5554,
+   "move": "slot1@3,4",
+   "score": 25,
+   "over": false,
+   "cause": null,
+   "placements": 5,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 25,
+   "sync": true
+  },
+  {
+   "i": 5,
+   "t_ms": 6469,
+   "move": "slot2@0,0",
+   "score": 28,
+   "over": false,
+   "cause": null,
+   "placements": 6,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crack",
+     "r": 6,
+     "c": 5,
+     "cd": 3
+    }
+   ],
+   "uiScore": 28,
+   "sync": true
+  },
+  {
+   "i": 6,
+   "t_ms": 7396,
+   "move": "slot0@5,5",
+   "score": 55,
+   "over": false,
+   "cause": null,
+   "placements": 7,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 55,
+   "sync": true
+  },
+  {
+   "i": 7,
+   "t_ms": 8299,
+   "move": "slot1@0,3",
+   "score": 58,
+   "over": false,
+   "cause": null,
+   "placements": 8,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 58,
+   "sync": true
+  },
+  {
+   "i": 8,
+   "t_ms": 9210,
+   "move": "slot2@1,0",
+   "score": 61,
+   "over": false,
+   "cause": null,
+   "placements": 9,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crack",
+     "r": 6,
+     "c": 7,
+     "cd": 3
+    }
+   ],
+   "uiScore": 61,
+   "sync": true
+  },
+  {
+   "i": 9,
+   "t_ms": 10111,
+   "move": "slot1@0,6",
+   "score": 73,
+   "over": false,
+   "cause": null,
+   "placements": 10,
+   "tier": 1,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crack",
+     "r": 6,
+     "c": 7,
+     "cd": 2
+    }
+   ],
+   "uiScore": 73,
+   "sync": true
+  },
+  {
+   "i": 10,
+   "t_ms": 11047,
+   "move": "slot0@5,7",
+   "score": 100,
+   "over": false,
+   "cause": null,
+   "placements": 11,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 100,
+   "sync": true
+  },
+  {
+   "i": 11,
+   "t_ms": 11938,
+   "move": "slot2@0,0",
+   "score": 103,
+   "over": false,
+   "cause": null,
+   "placements": 12,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 0,
+     "c": 3,
+     "cd": 3
+    }
+   ],
+   "uiScore": 103,
+   "sync": true
+  },
+  {
+   "i": 12,
+   "t_ms": 12837,
+   "move": "slot0@0,2",
+   "score": 106,
+   "over": false,
+   "cause": null,
+   "placements": 13,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 0,
+     "c": 3,
+     "cd": 2
+    }
+   ],
+   "uiScore": 106,
+   "sync": true
+  },
+  {
+   "i": 13,
+   "t_ms": 13730,
+   "move": "slot2@0,4",
+   "score": 109,
+   "over": false,
+   "cause": null,
+   "placements": 14,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 0,
+     "c": 3,
+     "cd": 1
+    }
+   ],
+   "uiScore": 109,
+   "sync": true
+  },
+  {
+   "i": 14,
+   "t_ms": 14619,
+   "move": "slot1@2,5",
+   "score": 123,
+   "over": false,
+   "cause": null,
+   "placements": 15,
+   "tier": 1,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crack",
+     "r": 2,
+     "c": 2,
+     "cd": 3
+    }
+   ],
+   "uiScore": 123,
+   "sync": true
+  },
+  {
+   "i": 15,
+   "t_ms": 15505,
+   "move": "slot0@5,5",
+   "score": 180,
+   "over": false,
+   "cause": null,
+   "placements": 16,
+   "tier": 1,
+   "chain": 2,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crack",
+     "r": 2,
+     "c": 2,
+     "cd": 2
+    }
+   ],
+   "uiScore": 180,
+   "sync": true
+  },
+  {
+   "i": 16,
+   "t_ms": 16437,
+   "move": "slot0@1,1",
+   "score": 205,
+   "over": false,
+   "cause": null,
+   "placements": 17,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 205,
+   "sync": true
+  },
+  {
+   "i": 17,
+   "t_ms": 17336,
+   "move": "slot2@0,0",
+   "score": 207,
+   "over": false,
+   "cause": null,
+   "placements": 18,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crack",
+     "r": 6,
+     "c": 7,
+     "cd": 3
+    }
+   ],
+   "uiScore": 207,
+   "sync": true
+  },
+  {
+   "i": 18,
+   "t_ms": 18231,
+   "move": "slot1@5,6",
+   "score": 236,
+   "over": false,
+   "cause": null,
+   "placements": 19,
+   "tier": 1,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [],
+   "uiScore": 236,
+   "sync": true
+  },
+  {
+   "i": 19,
+   "t_ms": 19133,
+   "move": "slot2@0,2",
+   "score": 238,
+   "over": false,
+   "cause": null,
+   "placements": 20,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": [
+    6,
+    4
+   ],
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [],
+   "uiScore": 238,
+   "sync": true
+  },
+  {
+   "i": 20,
+   "t_ms": 20048,
+   "move": "slot1@0,4",
+   "score": 241,
+   "over": false,
+   "cause": null,
+   "placements": 21,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crack",
+     "r": 4,
+     "c": 3,
+     "cd": 3
+    }
+   ],
+   "uiScore": 241,
+   "sync": true
+  },
+  {
+   "i": 21,
+   "t_ms": 20987,
+   "move": "slot0@2,2",
+   "score": 270,
+   "over": false,
+   "cause": null,
+   "placements": 22,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [],
+   "uiScore": 270,
+   "sync": true
+  },
+  {
+   "i": 22,
+   "t_ms": 21890,
+   "move": "slot0@0,7",
+   "score": 283,
+   "over": false,
+   "cause": null,
+   "placements": 23,
+   "tier": 2,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [],
+   "uiScore": 283,
+   "sync": true
+  },
+  {
+   "i": 23,
+   "t_ms": 22784,
+   "move": "slot1@0,2",
+   "score": 307,
+   "over": false,
+   "cause": null,
+   "placements": 24,
+   "tier": 2,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 4,
+     "c": 7,
+     "cd": 3
+    }
+   ],
+   "uiScore": 307,
+   "sync": true
+  },
+  {
+   "i": 24,
+   "t_ms": 23680,
+   "move": "slot2@0,0",
+   "score": 310,
+   "over": false,
+   "cause": null,
+   "placements": 25,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 4,
+     "c": 7,
+     "cd": 2
+    }
+   ],
+   "uiScore": 310,
+   "sync": true
+  },
+  {
+   "i": 25,
+   "t_ms": 24570,
+   "move": "slot0@0,2",
+   "score": 313,
+   "over": false,
+   "cause": null,
+   "placements": 26,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 4,
+     "c": 7,
+     "cd": 1
+    }
+   ],
+   "uiScore": 313,
+   "sync": true
+  },
+  {
+   "i": 26,
+   "t_ms": 25454,
+   "move": "slot1@0,4",
+   "score": 317,
+   "over": false,
+   "cause": null,
+   "placements": 27,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    6,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 5,
+     "c": 7,
+     "cd": 3
+    }
+   ],
+   "uiScore": 317,
+   "sync": true
+  },
+  {
+   "i": 27,
+   "t_ms": 26365,
+   "move": "slot2@1,5",
+   "score": 351,
+   "over": false,
+   "cause": null,
+   "placements": 28,
+   "tier": 2,
+   "chain": 2,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 6,
+     "c": 7,
+     "cd": 2
+    }
+   ],
+   "uiScore": 351,
+   "sync": true
+  },
+  {
+   "i": 28,
+   "t_ms": 27269,
+   "move": "slot2@7,5",
+   "score": 457,
+   "over": false,
+   "cause": null,
+   "placements": 29,
+   "tier": 2,
+   "chain": 1,
+   "rescued": 1,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crust",
+     "r": 6,
+     "c": 7,
+     "cd": 1
+    }
+   ],
+   "uiScore": 457,
+   "sync": true
+  },
+  {
+   "i": 29,
+   "t_ms": 28161,
+   "move": "slot2@3,7",
+   "score": 463,
+   "over": false,
+   "cause": null,
+   "placements": 30,
+   "tier": 2,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 6,
+     "cd": 3
+    }
+   ],
+   "uiScore": 463,
+   "sync": true
+  },
+  {
+   "i": 30,
+   "t_ms": 29067,
+   "move": "slot1@0,0",
+   "score": 466,
+   "over": false,
+   "cause": null,
+   "placements": 31,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": null,
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 6,
+     "cd": 2
+    }
+   ],
+   "uiScore": 466,
+   "sync": true
+  },
+  {
+   "i": 31,
+   "t_ms": 29952,
+   "move": "slot0@0,1",
+   "score": 470,
+   "over": false,
+   "cause": null,
+   "placements": 32,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": [
+    4,
+    4
+   ],
+   "baby": [
+    4,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 6,
+     "cd": 1
+    }
+   ],
+   "uiScore": 470,
+   "sync": true
+  },
+  {
+   "i": 32,
+   "t_ms": 30850,
+   "move": "slot2@0,4",
+   "score": 474,
+   "over": false,
+   "cause": null,
+   "placements": 33,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    4,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crow",
+     "r": 3,
+     "c": 3,
+     "cd": 3
+    }
+   ],
+   "uiScore": 474,
+   "sync": true
+  },
+  {
+   "i": 33,
+   "t_ms": 31746,
+   "move": "slot0@0,5",
+   "score": 488,
+   "over": false,
+   "cause": null,
+   "placements": 34,
+   "tier": 2,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crow",
+     "r": 3,
+     "c": 3,
+     "cd": 2
+    }
+   ],
+   "uiScore": 488,
+   "sync": true
+  },
+  {
+   "i": 34,
+   "t_ms": 32661,
+   "move": "slot1@2,2",
+   "score": 541,
+   "over": false,
+   "cause": null,
+   "placements": 35,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [],
+   "uiScore": 541,
+   "sync": true
+  },
+  {
+   "i": 35,
+   "t_ms": 33552,
+   "move": "slot2@0,0",
+   "score": 544,
+   "over": false,
+   "cause": null,
+   "placements": 36,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 5,
+     "cd": 3
+    }
+   ],
+   "uiScore": 544,
+   "sync": true
+  },
+  {
+   "i": 36,
+   "t_ms": 34434,
+   "move": "slot0@0,1",
+   "score": 545,
+   "over": false,
+   "cause": null,
+   "placements": 37,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 5,
+     "cd": 2
+    }
+   ],
+   "uiScore": 545,
+   "sync": true
+  },
+  {
+   "i": 37,
+   "t_ms": 35320,
+   "move": "slot2@0,2",
+   "score": 546,
+   "over": false,
+   "cause": null,
+   "placements": 38,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 5,
+     "cd": 1
+    }
+   ],
+   "uiScore": 546,
+   "sync": true
+  },
+  {
+   "i": 38,
+   "t_ms": 36225,
+   "move": "slot1@0,2",
+   "score": 550,
+   "over": false,
+   "cause": null,
+   "placements": 39,
+   "tier": 2,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crow",
+     "r": 6,
+     "c": 3,
+     "cd": 3
+    }
+   ],
+   "uiScore": 550,
+   "sync": true
+  },
+  {
+   "i": 39,
+   "t_ms": 37136,
+   "move": "slot0@0,5",
+   "score": 613,
+   "over": false,
+   "cause": null,
+   "placements": 40,
+   "tier": 3,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 5,
+     "c": 2,
+     "cd": 3
+    },
+    {
+     "type": "crack",
+     "r": 4,
+     "c": 2,
+     "cd": 3
+    }
+   ],
+   "uiScore": 613,
+   "sync": true
+  },
+  {
+   "i": 40,
+   "t_ms": 38032,
+   "move": "slot1@3,1",
+   "score": 641,
+   "over": false,
+   "cause": null,
+   "placements": 41,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 5,
+     "c": 2,
+     "cd": 2
+    }
+   ],
+   "uiScore": 641,
+   "sync": true
+  },
+  {
+   "i": 41,
+   "t_ms": 38935,
+   "move": "slot2@0,0",
+   "score": 644,
+   "over": false,
+   "cause": null,
+   "placements": 42,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 5,
+     "c": 2,
+     "cd": 1
+    },
+    {
+     "type": "jelly",
+     "r": 1,
+     "c": 4,
+     "cd": 3
+    },
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 1,
+     "cd": 3
+    }
+   ],
+   "uiScore": 644,
+   "sync": true
+  },
+  {
+   "i": 42,
+   "t_ms": 39815,
+   "move": "slot1@0,2",
+   "score": 647,
+   "over": false,
+   "cause": null,
+   "placements": 43,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 1,
+     "c": 4,
+     "cd": 2
+    },
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 1,
+     "cd": 2
+    }
+   ],
+   "uiScore": 647,
+   "sync": true
+  },
+  {
+   "i": 43,
+   "t_ms": 40726,
+   "move": "slot2@0,4",
+   "score": 650,
+   "over": false,
+   "cause": null,
+   "placements": 44,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 1,
+     "cd": 1
+    },
+    {
+     "type": "crack",
+     "r": 3,
+     "c": 4,
+     "cd": 3
+    },
+    {
+     "type": "jelly",
+     "r": 2,
+     "c": 2,
+     "cd": 3
+    }
+   ],
+   "uiScore": 650,
+   "sync": true
+  },
+  {
+   "i": 44,
+   "t_ms": 41619,
+   "move": "slot0@1,5",
+   "score": 664,
+   "over": false,
+   "cause": null,
+   "placements": 45,
+   "tier": 3,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crack",
+     "r": 3,
+     "c": 4,
+     "cd": 2
+    },
+    {
+     "type": "jelly",
+     "r": 2,
+     "c": 2,
+     "cd": 2
+    }
+   ],
+   "uiScore": 664,
+   "sync": true
+  },
+  {
+   "i": 45,
+   "t_ms": 42511,
+   "move": "slot2@6,7",
+   "score": 760,
+   "over": false,
+   "cause": null,
+   "placements": 46,
+   "tier": 3,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crack",
+     "r": 3,
+     "c": 4,
+     "cd": 1
+    },
+    {
+     "type": "jelly",
+     "r": 2,
+     "c": 2,
+     "cd": 1
+    },
+    {
+     "type": "crow",
+     "r": 6,
+     "c": 5,
+     "cd": 3
+    },
+    {
+     "type": "slime",
+     "r": 6,
+     "c": 7,
+     "cd": 3
+    }
+   ],
+   "uiScore": 760,
+   "sync": true
+  },
+  {
+   "i": 46,
+   "t_ms": 43426,
+   "move": "slot0@6,5",
+   "score": 858,
+   "over": false,
+   "cause": null,
+   "placements": 47,
+   "tier": 3,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [],
+   "uiScore": 858,
+   "sync": true
+  },
+  {
+   "i": 47,
+   "t_ms": 44330,
+   "move": "slot1@0,0",
+   "score": 862,
+   "over": false,
+   "cause": null,
+   "placements": 48,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    4
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 2,
+     "cd": 3
+    },
+    {
+     "type": "jelly",
+     "r": 5,
+     "c": 5,
+     "cd": 3
+    }
+   ],
+   "uiScore": 862,
+   "sync": true
+  },
+  {
+   "i": 48,
+   "t_ms": 45251,
+   "move": "slot0@7,7",
+   "score": 973,
+   "over": false,
+   "cause": null,
+   "placements": 49,
+   "tier": 3,
+   "chain": 1,
+   "rescued": 1,
+   "babySpawn": [
+    2,
+    6
+   ],
+   "baby": [
+    2,
+    6
+   ],
+   "threats": [
+    {
+     "type": "crust",
+     "r": 7,
+     "c": 2,
+     "cd": 2
+    },
+    {
+     "type": "jelly",
+     "r": 5,
+     "c": 5,
+     "cd": 2
+    }
+   ],
+   "uiScore": 973,
+   "sync": true
+  },
+  {
+   "i": 49,
+   "t_ms": 46149,
+   "move": "slot0@5,3",
+   "score": 977,
+   "over": false,
+   "cause": null,
+   "placements": 50,
+   "tier": 3,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    6
+   ],
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 5,
+     "c": 5,
+     "cd": 1
+    },
+    {
+     "type": "crack",
+     "r": 3,
+     "c": 5,
+     "cd": 3
+    },
+    {
+     "type": "crack",
+     "r": 1,
+     "c": 5,
+     "cd": 3
+    }
+   ],
+   "uiScore": 977,
+   "sync": true
+  },
+  {
+   "i": 50,
+   "t_ms": 47036,
+   "move": "slot1@1,5",
+   "score": 1030,
+   "over": false,
+   "cause": null,
+   "placements": 51,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    6
+   ],
+   "threats": [],
+   "uiScore": 1030,
+   "sync": true
+  },
+  {
+   "i": 51,
+   "t_ms": 47934,
+   "move": "slot2@0,0",
+   "score": 1034,
+   "over": false,
+   "cause": null,
+   "placements": 52,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    6
+   ],
+   "threats": [
+    {
+     "type": "crow",
+     "r": 6,
+     "c": 6,
+     "cd": 3
+    },
+    {
+     "type": "jelly",
+     "r": 6,
+     "c": 2,
+     "cd": 3
+    }
+   ],
+   "uiScore": 1034,
+   "sync": true
+  },
+  {
+   "i": 52,
+   "t_ms": 48819,
+   "move": "slot2@3,0",
+   "score": 1047,
+   "over": false,
+   "cause": null,
+   "placements": 53,
+   "tier": 3,
+   "chain": 1,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    6
+   ],
+   "threats": [
+    {
+     "type": "crow",
+     "r": 6,
+     "c": 6,
+     "cd": 2
+    },
+    {
+     "type": "jelly",
+     "r": 6,
+     "c": 2,
+     "cd": 2
+    }
+   ],
+   "uiScore": 1047,
+   "sync": true
+  },
+  {
+   "i": 53,
+   "t_ms": 49728,
+   "move": "slot0@0,0",
+   "score": 1051,
+   "over": false,
+   "cause": null,
+   "placements": 54,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    6
+   ],
+   "threats": [
+    {
+     "type": "crow",
+     "r": 6,
+     "c": 6,
+     "cd": 1
+    },
+    {
+     "type": "jelly",
+     "r": 6,
+     "c": 2,
+     "cd": 1
+    },
+    {
+     "type": "jelly",
+     "r": 6,
+     "c": 3,
+     "cd": 3
+    },
+    {
+     "type": "crust",
+     "r": 4,
+     "c": 5,
+     "cd": 3
+    }
+   ],
+   "uiScore": 1051,
+   "sync": true
+  },
+  {
+   "i": 54,
+   "t_ms": 50650,
+   "move": "slot1@0,3",
+   "score": 1055,
+   "over": true,
+   "cause": "baby",
+   "placements": 55,
+   "tier": 3,
+   "chain": 0,
+   "rescued": 0,
+   "babySpawn": null,
+   "baby": [
+    7,
+    6
+   ],
+   "threats": [
+    {
+     "type": "jelly",
+     "r": 6,
+     "c": 3,
+     "cd": 2
+    },
+    {
+     "type": "crust",
+     "r": 4,
+     "c": 5,
+     "cd": 2
+    }
+   ],
+   "uiScore": 1055,
+   "sync": true
+  }
+ ]
+}

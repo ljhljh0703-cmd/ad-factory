@@ -1,0 +1,8 @@
+{
+ "run": "G01",
+ "per_type": 2,
+ "made": "2026-10-22T03:06:59",
+ "facts": "game/gem-tower.json",
+ "criteria": "CRITERIA.md",
+ "game": "gem-tower"
+}

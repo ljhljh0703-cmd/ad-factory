@@ -1,0 +1,17 @@
+2026-10-22T09:43:40 시작
+2026-10-22T09:43:40 Traceback (most recent call last):
+  File "/home/claude/gaf/engine/adf/jobs.py", line 130, in run_one
+    res = fn(j, **j.d["인자"])
+          ~~^^^^^^^^^^^^^^^^^^
+  File "/home/claude/gaf/engine/adf/stages.py", line 104, in judge_llm
+    text = pv.complete(job, f"llm-{i}", prompt, model)
+  File "/home/claude/gaf/engine/adf/providers.py", line 67, in complete
+    job.model_call(self.name, model, {"열쇠": key, "입력_토큰": 0, "출력_토큰": 0, "추정": False})
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/claude/gaf/engine/adf/jobs.py", line 76, in model_call
+    c["호출"].append({"제공자": provider, "모델": model, **usage})
+    ~^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+2026-10-22T09:43:45 시작
+2026-10-22T09:43:45 완료

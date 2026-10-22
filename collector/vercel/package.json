@@ -1,0 +1,1 @@
+{ "name": "jelly-panic-collector", "private": true, "type": "module", "dependencies": { "@vercel/blob": "0.27.3" } }

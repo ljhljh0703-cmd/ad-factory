@@ -1,0 +1,9 @@
+{
+ "video": "../ua/ads/A6-fail-lines.mp4",
+ "fps": 1,
+ "frames": 10,
+ "sheets": [
+  "runs/V-A6-fail-lines/sheet_01.png",
+  "runs/V-A6-fail-lines/sheet_02.png"
+ ]
+}

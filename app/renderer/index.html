@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; media-src file:">
+<title>광고 공장</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<aside class="side">
+  <div class="brand"><span class="dot"></span>광고 공장</div>
+  <nav id="nav">
+    <button data-tab="home" class="on">한눈에</button>
+    <button data-tab="plan">기획</button>
+    <button data-tab="jobs">작업</button>
+    <button data-tab="review">사람 검토 <b class="cnt" id="cReview"></b></button>
+    <button data-tab="regress">회귀 감시</button>
+    <button data-tab="facts">사실표 대조</button>
+    <button data-tab="publish">게시 승인 <b class="cnt" id="cPublish"></b></button>
+    <button data-tab="perf">성과</button>
+  </nav>
+  <div class="foot" id="info"></div>
+</aside>
+<main>
+  <header class="top">
+    <h1 id="title">한눈에</h1>
+    <div class="actions"><span id="busy" class="busy" hidden>엔진 실행 중…</span><button id="cloudPush" title="AI 요청을 저장소에 올림 → Code 탭 클라우드 세션이 답함">클라우드에 맡기기 <b class="cnt" id="cPending"></b></button><button id="cloudPull" title="클라우드 답을 받아 대기열을 이어 돌림">클라우드 결과 받기</button><button id="runQueue" class="primary">대기열 돌리기</button><button id="refresh" class="ghost">새로 고침</button></div>
+  </header>
+  <div id="toast" class="toast" hidden></div>
+
+  <section data-panel="home" class="panel on">
+    <div class="grid" id="homeCards"></div>
+    <h2>최근 작업</h2>
+    <div id="homeJobs"></div>
+  </section>
+
+  <section data-panel="plan" class="panel">
+    <p class="lead">말로 적으면 캠페인 명세로 바꾸고, 기준표·게임 사실·게시 가능 여부를 검사합니다. 빠진 값은 질문으로 돌려줍니다.</p>
+    <textarea id="planText" rows="4" placeholder="예) 젤리 패닉 다음 주 틱톡·쇼츠에 6개. 질 뻔하다 뒤집기 위주, 무료로만. 처음 해보는 사람이 첫 판 두게"></textarea>
+    <div class="row"><button id="planSend" class="primary">명세로 바꾸기</button><span class="hint">AI 응답은 작업 탭에서 기다리는 상태로 보일 수 있습니다(키가 없으면 Claude 세션이 답을 넣음)</span></div>
+    <div id="planList"></div>
+  </section>
+
+  <section data-panel="jobs" class="panel">
+    <div class="row"><select id="pipeSel"></select><input id="pipeArgs" placeholder="run=J30 set=dev"><button id="pipeAdd">묶음 넣기</button></div>
+    <div id="jobsTable"></div>
+  </section>
+
+  <section data-panel="review" class="panel">
+    <p class="lead">AI가 「사람 확인」으로 넘긴 소재입니다. 결정마다 이유를 남기면 평가셋 후보로 들어가 다음 회귀 검사부터 함께 돕니다.</p>
+    <div id="reviewQueue"></div>
+    <h2>처리한 것</h2>
+    <div id="reviewDone"></div>
+  </section>
+
+  <section data-panel="regress" class="panel">
+    <p class="lead">기준표·사실표·요청문·규칙 코드·모델 중 하나라도 바뀌면 평가셋을 다시 돌립니다. 반려를 통과시킨 것이 하나라도 나오면 막습니다. 숨긴 묶음은 배포 전에만 돌립니다.</p>
+    <div class="row"><button id="regCheck" class="primary">바뀐 것 확인</button><button id="regRelease">배포 전 확인(숨긴 묶음 포함)</button></div>
+    <div id="regTable"></div>
+  </section>
+
+  <section data-panel="facts" class="panel">
+    <p class="lead">공개판 소스에서 안내 문구·판 끝 문구·화면 요소·규칙 숫자를 뽑아 사실표와 맞춥니다. 어긋나면 심사가 돌지 않습니다.</p>
+    <div id="factsList"></div>
+  </section>
+
+  <section data-panel="publish" class="panel">
+    <p class="lead">심사 통과·녹화본 대조 통과·게시 허락된 게임·링크 꼬리표·AI 표시를 자동으로 봅니다. 승인은 사람 이름으로만 하고, 승인 뒤 영상이나 글이 바뀌면 다시 승인해야 합니다. 채널 계정이 연결되기 전에는 연습으로만 돕니다.</p>
+    <div id="audit" class="note"></div>
+    <div id="pubList"></div>
+  </section>
+
+  <section data-panel="perf" class="panel">
+    <div class="row"><button id="perfPull" class="primary">수집기에서 최근 7일 받아 보고</button><span class="hint">게임 익명 기록을 받아 광고별로 묶고 AI 주간 보고까지(시험 기록은 뺌)</span></div>
+    <div class="row"><input id="perfDir" placeholder="runs/events" value="runs/events-bot"><input id="perfCsv" placeholder="플랫폼 통계 CSV(없으면 비움)"><input id="perfNote" placeholder="메모(예: 봇 시험 기록)"><button id="perfAdd">이 폴더로 보고</button></div>
+    <div id="perfList"></div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

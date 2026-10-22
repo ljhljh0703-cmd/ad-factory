@@ -1,0 +1,14 @@
+import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+const b = await chromium.launch();
+const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 })).newPage();
+const errs=[]; p.on('pageerror', e=>errs.push(String(e)));
+const t0=Date.now();
+await p.goto('https://ljhljh0703-cmd.github.io/uzmap-forge/?seed=7', { waitUntil: 'networkidle', timeout: 120000 });
+await p.waitForFunction(()=>document.documentElement.dataset.gameReady==='true',null,{timeout:120000}).catch(e=>errs.push('ready timeout'));
+console.log('ready ms', Date.now()-t0);
+await p.screenshot({ path: 'p0.png' });
+const btns = await p.$$eval('button:not([hidden])', bs=>bs.filter(b=>b.offsetParent).map(b=>b.id+'|'+b.textContent.trim().slice(0,30)));
+console.log(btns.join('\n'));
+console.log(await p.evaluate(()=>document.getElementById('msg').innerText.slice(0,200)));
+console.log('errs', errs);
+await b.close();

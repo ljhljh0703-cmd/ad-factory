@@ -1,0 +1,106 @@
+From c99cd2867521922eb723759edfe82a8c85cadb58 Mon Sep 17 00:00:00 2001
+From: ljhljh0703-cmd <ljhljh0703@gmail.com>
+Date: Thu, 22 Oct 2026 10:25:31 +0900
+Subject: [PATCH] =?UTF-8?q?=EC=9D=B5=EB=AA=85=20=EA=B8=B0=EB=A1=9D:=20?=
+ =?UTF-8?q?=ED=8C=90=20=EC=8B=9C=EC=9E=91=C2=B7=EC=B2=AB=20=EC=88=98=C2=B7?=
+ =?UTF-8?q?=ED=8C=90=20=EB=81=9D=C2=B7=EB=8B=A4=EC=8B=9C=20=ED=95=98?=
+ =?UTF-8?q?=EA=B8=B0=20(=EC=88=98=EC=A7=91=20=EC=A3=BC=EC=86=8C=EA=B0=80?=
+ =?UTF-8?q?=20=EB=B9=84=EB=A9=B4=20=EB=B3=B4=EB=82=B4=EC=A7=80=20=EC=95=8A?=
+ =?UTF-8?q?=EC=9D=8C,=20DNT=C2=B7GPC=C2=B7=3Fnotrack=20=EC=9D=B4=EB=A9=B4?=
+ =?UTF-8?q?=20=EB=81=94)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012cm67AQFwDg9dggkmP8X29
+---
+ index.html | 44 +++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 43 insertions(+), 1 deletion(-)
+
+diff --git a/index.html b/index.html
+index 14ba939..cc3d176 100644
+--- a/index.html
++++ b/index.html
+@@ -960,6 +960,45 @@
+   var CRUST_COLOR = '#DCEFF5', SLIME_COLOR = '#7A4E2D', BABY_COLOR = '#FFDFAE', CROW_ACCENT = '#37474F';
+   function cellColor(r, c) { var ci = state.colors[r][c]; return ci == null ? '#FFC15E' : PIECE_COLORS[ci % PIECE_COLORS.length]; }
+ 
++
++  // ── 익명 기록 (광고 성과 보기용) ──
++  // 보내는 것: 탭마다 새로 뽑는 무작위 번호, 광고 꼬리표(src·ad), 판 시작·첫 수·판 끝·다시 하기와 그 판의 숫자(점수·놓은 수·걸린 초).
++  // 보내지 않는 것: 이름·사진·기기 식별자·쿠키·저장소 값. 사진을 등록했는지 여부도 보내지 않는다.
++  // 수집 주소(TRACK_URL)가 비어 있으면 아무것도 보내지 않는다. Do Not Track·Global Privacy Control·?notrack 이면 끈다.
++  var TRACK_URL = '';
++  var track = (function () {
++    var q = location.search || '';
++    var pick = function (re) { var m = re.exec(q); return m ? m[1] : ''; };
++    var src = pick(/[?&]src=([A-Za-z0-9_-]{1,24})/) || 'direct', ad = pick(/[?&]ad=([A-Za-z0-9_-]{1,32})/);
++    var seedFromUrl = /[?&]seed=\d+/.test(q);
++    var nav = window.navigator || {};
++    var off = nav.doNotTrack === '1' || nav.globalPrivacyControl === true || /[?&]notrack\b/.test(q);
++    var sid = Math.random().toString(36).slice(2, 10), n = 0, t0 = Date.now(), queue = [], sent = [];
++    var game = { t: t0, moved: false };
++    function flush() {
++      if (off || !TRACK_URL || !queue.length) return;
++      var body = JSON.stringify(queue.splice(0, queue.length));
++      try { if (nav.sendBeacon && nav.sendBeacon(TRACK_URL, body)) return; } catch (e) {}
++      try { fetch(TRACK_URL, { method: 'POST', body: body, keepalive: true, headers: { 'content-type': 'text/plain' } }); } catch (e) {}
++    }
++    function ev(type, data) {
++      if (off) return;
++      var e = { v: 1, sid: sid, n: n++, sec: Math.round((Date.now() - t0) / 1000), type: type, src: src, ad: ad };
++      for (var k in data) if (Object.prototype.hasOwnProperty.call(data, k)) e[k] = data[k];
++      queue.push(e); sent.push(e);
++      if (queue.length >= 10 || type === 'end') flush();
++    }
++    if (document.addEventListener) document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flush(); });
++    if (window.addEventListener) window.addEventListener('pagehide', flush);
++    window.__track = { events: sent, off: off };
++    return {
++      start: function (mode, seed) { game = { t: Date.now(), moved: false }; ev('start', { mode: mode, seed: seedFromUrl ? seed : null }); seedFromUrl = false; },
++      move: function (mode) { if (game.moved) return; game.moved = true; ev('first_move', { mode: mode, after: Math.round((Date.now() - game.t) / 1000) }); },
++      end: function (st) { ev('end', { mode: st.mode, cause: st.overCause, score: st.score, placements: st.placements, rescued: runRescued, after: Math.round((Date.now() - game.t) / 1000) }); },
++      restart: function (cause) { ev('restart', { prev: cause || null }); }
++    };
++  })();
++
+   // ── 상태 ── (colorGrid 제거 — 세션4부터 색은 코어 state.colors가 단일 출처)
+   var state, fx, cellPop, fallAnim, shakeT, mascotTimer, firstPlaceDone = false;
+   var boardCv = document.getElementById('board'), bctx = boardCv.getContext('2d');
+@@ -994,6 +1033,7 @@
+     updateTier();
+     updateStatus();
+     drawTray();
++    track.start(currentMode, seed);
+     if (!firstPlaceDone) showHint();
+     showOnce('bin', '안 쓰는 조각은 통에 버려요 — 대신 위협이 다가와요');
+   }
+@@ -1811,6 +1851,7 @@
+   // 이벤트 → 연출 공용 처리 (배치·버리기 공용 — ev가 전부 결정)
+   function juice(ev) {
+     var t = performance.now();
++    track.move(currentMode);
+     if (!firstPlaceDone) { firstPlaceDone = true; hideHint(); }
+     ev.placed.forEach(function (p) { cellPop[p[0] + ',' + p[1]] = t; });
+     var itemGain = ev.gained - (ev.chain.length ? ev.chain.reduce(function (a, s2) { return a + s2.gained; }, 0) : 0);
+@@ -1994,7 +2035,7 @@
+   });
+   syncMuteLabel();
+   document.getElementById('restart').addEventListener('click', function () { reset((Date.now() % 1000000) | 0); });
+-  document.getElementById('replay').addEventListener('click', function () { reset((Date.now() % 1000000) | 0); });
++  document.getElementById('replay').addEventListener('click', function () { track.restart(state && state.overCause); reset((Date.now() % 1000000) | 0); });
+   // 종료하기 (세션12 — 작가: "다시 하기와 종료하기만"). 앱인토스 런타임에서는 플랫폼 닫기 API로 교체 예정.
+   var quitEl = document.getElementById('quit');
+   if (quitEl && quitEl.addEventListener) quitEl.addEventListener('click', function () {
+@@ -2093,6 +2134,7 @@
+   });
+ 
+   function endGame() {
++    track.end(state);
+     var won = state.overCause === 'clear'; // 세션13: 임무 완수
+     if (won) { sfx('rescue'); buzz([60, 40, 80]); setMascot('cheer'); }
+     else { sfx('over'); setMascot('ko'); }
+-- 
+2.43.0
+

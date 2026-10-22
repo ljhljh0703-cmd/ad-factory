@@ -1,0 +1,9 @@
+{
+ "video": "/home/claude/gaf/ua/ads/G1-fail-center.mp4",
+ "fps": 1,
+ "frames": 16,
+ "sheets": [
+  "/home/claude/gaf/verify/runs/V-G1-fail-center/sheet_01.png",
+  "/home/claude/gaf/verify/runs/V-G1-fail-center/sheet_02.png"
+ ]
+}

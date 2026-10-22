@@ -1,0 +1,33 @@
+{
+ "id": "P-G1-fail-center-youtube",
+ "광고": "G1-fail-center",
+ "소재": "G1-fail-center",
+ "채널": "유튜브 쇼츠",
+ "글": {
+  "게임": "gem-tower",
+  "채널": "유튜브 쇼츠",
+  "제목": "가운데에만 몰아 지었더니 웨이브 10에서",
+  "글": "보석을 판 가운데에만 모아 지었더니 적이 옆길로 다 빠져나갔어요. 너라면 어디에 지었을까?",
+  "태그": [
+   "보석타워",
+   "타워디펜스"
+  ],
+  "링크": "https://ljhljh0703-cmd.github.io/uzmap-forge/web/?src=shorts&ad=G1-fail-center",
+  "AI표시": "켬(대본·편집 AI, 화면은 실제 플레이 자동 녹화)"
+ },
+ "영상": "ua/ads/G1-fail-center.mp4",
+ "영상_해시": "0ffebb0d74baa5c2bc388586e1dd93310b26934225c5a23bdaa14c2ef4e87b92",
+ "글_해시": "c77ba0f49fabaf206394f9c71d831ff962af38e27ae3c4b78e33886a9e7babf0",
+ "점검": {
+  "심사 통과": false,
+  "녹화본 대조 통과": true,
+  "게시 허락된 게임": false,
+  "링크 꼬리표(src·ad)": true,
+  "AI 표시 켬": true,
+  "영상 있음": true
+ },
+ "심사_회차": null,
+ "상태": "점검실패",
+ "승인": null,
+ "요청_때": "2026-10-22T11:37:01"
+}

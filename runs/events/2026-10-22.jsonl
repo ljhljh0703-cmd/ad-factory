@@ -1,0 +1,6 @@
+{"v":1,"sid":"selftest","n":0,"sec":0,"type":"start","src":"test","ad":"deploycheck","mode":"classic","at":1792633680363}
+{"v":1,"sid":"v5xzupqi","n":0,"sec":0,"type":"start","src":"test","ad":"livemvivtpqe","mode":"classic","seed":71,"at":1792633743222}
+{"v":1,"sid":"v5xzupqi","n":1,"sec":1,"type":"first_move","src":"test","ad":"livemvivtpqe","mode":"classic","after":1,"at":1792633743222}
+{"v":1,"sid":"v5xzupqi","n":2,"sec":33,"type":"end","src":"test","ad":"livemvivtpqe","mode":"classic","after":33,"cause":"no-space","score":2989,"placements":108,"rescued":5,"at":1792633743222}
+{"v":1,"sid":"v5xzupqi","n":3,"sec":34,"type":"restart","src":"test","ad":"livemvivtpqe","prev":"no-space","at":1792633744093}
+{"v":1,"sid":"v5xzupqi","n":4,"sec":34,"type":"start","src":"test","ad":"livemvivtpqe","mode":"classic","at":1792633744093}
