@@ -54,6 +54,8 @@ def rules(c, name="젤리 패닉"):
     rating = r"이용가|등급" if name == "젤리 패닉" else r"이용가|이용\s*등급|(전체|청소년|\d+\s*세)\s*등급|등급\s*(분류|판정|받)"  # 보석 「등급」은 게임 안 낱말(JG01 오탐 2건 뒤 고침)
     if re.search(rating, copy): hits.append(("R5", "받은 등급이 없어 등급 표시를 쓸 수 없습니다. 지우세요."))
     if re.search(r"\d", copy) and not any(h[0] in ("R2", "R4", "R5") for h in hits): hits.append(("G8", "문구에 숫자가 있습니다. 숫자 없이 장면으로 쓰세요."))
+    if name == "젤리 패닉" and re.search(r"같은\s*판(으로|이|에서)?\s*(바로\s*)?열", copy) and "seed=" not in (c.get("링크") or ""):
+        hits.append(("R1", "같은 판으로 열린다는 문구가 있는데 링크에 판 번호(seed)가 없습니다. 공유 버튼은 그림만 보냅니다. 문구를 지우거나 링크에 ?seed=번호를 붙이세요."))  # G002 dev P15 를 모델 두 번이 모두 통과시켜 기계 규칙으로 옮김
     if name == "젤리 패닉" and re.search(r"보스|병사|핀을? 뽑|(^|\s)용(이|을|과|\s)", scene + " ".join(c.get("도입부") or [])): hits.append(("R1", "게임에 없는 것(보스·병사·핀 뽑기·용)이 나옵니다. 실제 위협 장면으로 바꾸세요."))
     if is_video(c):
         if c.get("화면비") and c["화면비"] != "9:16": hits.append(("G6", "세로 9:16이 아닙니다. 세로로 다시 자르세요."))

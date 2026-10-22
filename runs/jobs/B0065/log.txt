@@ -1,0 +1,3 @@
+2026-10-22T16:01:30 시작
+2026-10-22T16:01:30 /home/claude/ad-factory/judge/runs/G003-dev/prompt.md 19916 자 · 54 개
+2026-10-22T16:01:30 완료
