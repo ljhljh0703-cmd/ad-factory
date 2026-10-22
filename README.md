@@ -6,3 +6,4 @@
 - AI 단계: 기본은 Code 탭 클라우드 세션이 답함. 앱 「클라우드에 맡기기」 → Code 탭에서 「대기 중인 거 처리해」 → 앱 「클라우드 결과 받기」
 - 엔진 명령: `engine/README.md`
 - 기록: `PROCESS.md`(1단계), `EXTENSION.md`(내부 앱으로 넓힌 것), `RECORDING.md`(녹화 장면)
+- 홍보영상: [가로 30초](promo/promo-30s.mp4) · [세로 15초](promo/promo-15s-vertical.mp4)
