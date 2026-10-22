@@ -6,12 +6,33 @@
 - 실제 업로드는 채널 토큰이 있을 때만. 없으면 「연습」으로 기록하고 아무것도 보내지 않는다
 - 감사 기록은 줄마다 앞 줄 해시를 품어, 중간 줄을 고치면 검사에서 드러난다
 """
-import json, os, glob, hashlib, datetime
+import json, os, re, glob, hashlib, datetime
 
 from . import paths
 
-CHANNEL_KEYS = {"유튜브 쇼츠": ("youtube", "YOUTUBE_OAUTH_TOKEN"), "틱톡": ("tiktok", "TIKTOK_ACCESS_TOKEN"),
-                "인스타그램 릴스": ("instagram", "INSTAGRAM_ACCESS_TOKEN")}
+# 게시 채널: 작가 결정 10-22 「릴스·쇼츠 둘」(틱톡 내림). 광고 하나를 채널마다 따로 요청하고, 링크 꼬리표 src 로 반응을 채널별로 센다
+CHANNEL_KEYS = {"유튜브 쇼츠": ("youtube", "YOUTUBE_OAUTH_TOKEN"), "인스타그램 릴스": ("instagram", "INSTAGRAM_ACCESS_TOKEN")}
+CHANNEL_SRC = {"유튜브 쇼츠": "shorts", "인스타그램 릴스": "reels"}
+SHORT = {"youtube": "유튜브 쇼츠", "shorts": "유튜브 쇼츠", "instagram": "인스타그램 릴스", "reels": "인스타그램 릴스"}
+
+
+def channels(ad):
+    post = json.load(open(paths.p("ua", "ads", "posts.json"), encoding="utf-8"))[ad]
+    return post.get("채널들") or [post["채널"]]
+
+
+def channel_post(ad, channel):
+    """광고 글을 채널에 맞춘 꼴: 채널 이름, 링크의 src 꼬리표, 채널별로 따로 적은 칸(채널별_글)을 덮어씀. 승인 해시는 이 꼴로 묶는다."""
+    base = json.load(open(paths.p("ua", "ads", "posts.json"), encoding="utf-8"))[ad]
+    post = {k: v for k, v in base.items() if k not in ("채널들", "채널별_글")}
+    post.update((base.get("채널별_글") or {}).get(channel, {}))
+    post["채널"] = channel
+    src = CHANNEL_SRC.get(channel)
+    if src: post["링크"] = re.sub(r"([?&])src=[^&]*", rf"\g<1>src={src}", post["링크"]) if "src=" in post["링크"] else post["링크"] + ("&" if "?" in post["링크"] else "?") + f"src={src}"
+    return post
+
+
+def _post_hash(post): return hashlib.sha256(json.dumps(post, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
 
 
 def pdir(sub=None):
@@ -57,9 +78,13 @@ def _decision(cid):
     return best
 
 
-def request(ad, game=None):
-    posts = json.load(open(paths.p("ua", "ads", "posts.json"), encoding="utf-8"))
-    post = posts[ad]; game = game or post.get("게임", "jelly-panic"); video = paths.p("ua", "ads", f"{ad}.mp4")
+def request(ad, game=None, channel=None):
+    """채널을 안 주면 그 광고의 채널마다 하나씩 요청하고 목록을 돌려준다."""
+    if channel is None:
+        return [request(ad, game, c) for c in channels(ad)]
+    channel = SHORT.get(channel, channel)
+    if channel not in channels(ad): raise ValueError(f"{ad} 는 {channel} 에 올리는 광고가 아님: {channels(ad)}")
+    post = channel_post(ad, channel); game = game or post.get("게임", "jelly-panic"); video = paths.p("ua", "ads", f"{ad}.mp4")
     cid = post["링크"].split("ad=")[1].split("&")[0]
     man = json.load(open(paths.p("adapters", game, "adapter.json"), encoding="utf-8"))
     dec = _decision(cid)
@@ -75,7 +100,7 @@ def request(ad, game=None):
     }
     rid = f"P-{ad}-{CHANNEL_KEYS.get(post['채널'], ('x',))[0]}"
     req = {"id": rid, "광고": ad, "소재": cid, "채널": post["채널"], "글": post, "영상": paths.rel(video),
-           "영상_해시": _sha(video) if os.path.exists(video) else None, "글_해시": hashlib.sha256(json.dumps(post, ensure_ascii=False, sort_keys=True).encode()).hexdigest(),
+           "영상_해시": _sha(video) if os.path.exists(video) else None, "글_해시": _post_hash(post),
            "점검": checks, "심사_회차": dec[0] if dec else None, "상태": "승인대기" if all(checks.values()) else "점검실패",
            "승인": None, "요청_때": now()}
     json.dump(req, open(os.path.join(pdir("requests"), rid + ".json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -94,8 +119,7 @@ def approve(rid, who, note=""):
     if r["상태"] != "승인대기": raise ValueError(f"승인할 수 없는 상태: {r['상태']}")
     if not who or who in ("AI", "엔진"): raise ValueError("승인은 사람 이름으로만")
     video = paths.p(r["영상"])
-    posts = json.load(open(paths.p("ua", "ads", "posts.json"), encoding="utf-8"))
-    now_post = hashlib.sha256(json.dumps(posts[r["광고"]], ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+    now_post = _post_hash(channel_post(r["광고"], r["채널"]))
     if not os.path.exists(video) or _sha(video) != r["영상_해시"] or now_post != r["글_해시"]:
         # 점검은 요청 때 파일로 했다. 그 뒤 바뀐 파일을 승인하면 점검 안 된 것을 승인하게 된다(10-22 녹화 리허설에서 발견)
         audit("막음", 요청=rid, 이유="요청 뒤 영상이나 글이 바뀜(승인 전)")
@@ -109,8 +133,7 @@ def run(rid):
     r = _load(rid)
     if r["상태"] != "승인" or not r.get("승인"): raise PermissionError("사람 승인 없이 게시할 수 없습니다")
     video = paths.p(r["영상"])
-    posts = json.load(open(paths.p("ua", "ads", "posts.json"), encoding="utf-8"))
-    now_post = hashlib.sha256(json.dumps(posts[r["광고"]], ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+    now_post = _post_hash(channel_post(r["광고"], r["채널"]))
     if _sha(video) != r["승인"]["영상_해시"] or now_post != r["승인"]["글_해시"]:
         r["상태"] = "승인무효(바뀜)"; _save(r); audit("막음", 요청=rid, 이유="승인 뒤 영상이나 글이 바뀜")
         raise PermissionError("승인 뒤 영상이나 글이 바뀌었습니다. 다시 승인하세요")
@@ -130,7 +153,15 @@ def _not_ready(video, post, token):
     raise NotImplementedError("채널 계정 연결 전: 업로더를 시험하지 않았습니다")
 
 
-UPLOADERS = {"youtube": _not_ready, "tiktok": _not_ready, "instagram": _not_ready}
+UPLOADERS = {"youtube": _not_ready, "instagram": _not_ready}
+
+
+def withdraw(rid, why):
+    """요청 내림(채널을 접었을 때 등). 파일은 지우지 않고 상태만 바꾸고 감사 기록에 남긴다."""
+    r = _load(rid)
+    if r["상태"] == "게시됨": raise ValueError("이미 게시된 요청은 내릴 수 없습니다(채널에서 직접 내리기)")
+    r["상태"] = "내림"; r["내림"] = {"때": now(), "이유": why}; _save(r); audit("내림", 요청=rid, 이유=why)
+    return r
 
 
 def requests():

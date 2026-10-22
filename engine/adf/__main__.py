@@ -68,7 +68,8 @@ def main(argv):
     elif cmd == "publish":
         from . import publish
         sub = rest[0] if rest else "list"; a = kv(rest[1:])
-        if sub == "request": out = publish.request(a["ad"])
+        if sub == "request": out = publish.request(a["ad"], channel=a.get("channel"))
+        elif sub == "withdraw": out = publish.withdraw(a["id"], a.get("why", ""))
         elif sub == "approve": out = publish.approve(a["id"], a.get("who"), a.get("note", ""))
         elif sub == "run": out = publish.run(a["id"])
         elif sub == "audit": out = publish.verify_audit()
