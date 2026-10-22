@@ -70,6 +70,7 @@ def main(argv):
         sub = rest[0] if rest else "list"; a = kv(rest[1:])
         if sub == "request": out = publish.request(a["ad"], channel=a.get("channel"))
         elif sub == "withdraw": out = publish.withdraw(a["id"], a.get("why", ""))
+        elif sub == "public": out = publish.make_public(a["id"], a.get("who"))
         elif sub == "approve": out = publish.approve(a["id"], a.get("who"), a.get("note", ""))
         elif sub == "run": out = publish.run(a["id"])
         elif sub == "audit": out = publish.verify_audit()
@@ -119,6 +120,14 @@ def main(argv):
             out = {**relay.push("맥 앱: 작업 상태와 AI 요청"), "기다리는_요청": len(relay.pending())}
         else:
             out = relay.pull(); out["대기열"] = jobs.run_queue(); out["상태"] = summary()
+    elif cmd == "youtube":
+        from . import youtube
+        sub = rest[0] if rest else "status"; a = kv(rest[1:])
+        if sub == "client": out = youtube.set_client(a["file"])
+        elif sub == "auth-url": out = youtube.auth_url()
+        elif sub == "auth-code": out = youtube.auth_code(a["url"])
+        elif sub == "channel": out = youtube.channel()
+        else: out = {"권한": youtube.ready(), "열쇠_파일": youtube.cred_path(), "채널_id": youtube.load().get("channel_id")}
     elif cmd == "retry":
         j = jobs.get(rest[0]); j.d.update({"상태": "대기", "오류": None}); j.save(); out = j.d
     else:

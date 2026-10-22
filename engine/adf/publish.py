@@ -138,6 +138,12 @@ def run(rid):
         r["상태"] = "승인무효(바뀜)"; _save(r); audit("막음", 요청=rid, 이유="승인 뒤 영상이나 글이 바뀜")
         raise PermissionError("승인 뒤 영상이나 글이 바뀌었습니다. 다시 승인하세요")
     ch, env = CHANNEL_KEYS[r["채널"]]
+    if ch == "youtube":
+        from . import youtube
+        if youtube.ready():  # 처음 올림은 비공개. 공개는 make_public 에서 사람 이름으로
+            res = youtube.upload(video, r["글"], "private", synthetic="AI 생성" in str(r["글"].get("AI표시", "")))
+            r.update({"상태": "게시됨(비공개)", "게시": res}); _save(r); audit("게시", 요청=rid, 채널=ch, 공개="비공개", 결과=res)
+            return r
     if not os.environ.get(env):
         r["상태"] = "연습완료"; _save(r)
         audit("연습", 요청=rid, 채널=ch, 이유=f"{env} 없음: 아무것도 보내지 않음", 보낼_내용={"제목": r["글"].get("제목"), "글": r["글"]["글"][:80], "링크": r["글"]["링크"]})
@@ -154,6 +160,18 @@ def _not_ready(video, post, token):
 
 
 UPLOADERS = {"youtube": _not_ready, "instagram": _not_ready}
+
+
+def make_public(rid, who):
+    """비공개로 올린 영상을 사람 이름으로 공개 전환(작가가 폰에서 확인한 뒤)."""
+    r = _load(rid)
+    if r["상태"] != "게시됨(비공개)": raise ValueError(f"공개로 바꿀 수 없는 상태: {r['상태']}")
+    if not who or who in ("AI", "엔진"): raise ValueError("공개 전환은 사람 이름으로만")
+    from . import youtube
+    st = youtube.set_privacy(r["게시"]["영상_id"], "public")
+    r["상태"] = "게시됨"; r["게시"]["공개"] = st; r["공개_승인"] = {"누가": who, "때": now()}; _save(r)
+    audit("공개", 요청=rid, 누가=who, 영상=r["게시"]["영상_id"])
+    return r
 
 
 def withdraw(rid, why):

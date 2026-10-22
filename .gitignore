@@ -7,3 +7,4 @@ collector/data/
 **/frames/
 *.tgz
 *.old
+.local/
