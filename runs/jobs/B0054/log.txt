@@ -1,0 +1,3 @@
+2026-10-22T13:14:37 시작
+2026-10-22T13:14:37 /Users/godju/ad-factory/judge/runs/G002-dev/prompt.md 19916 자 · 54 개
+2026-10-22T13:14:37 완료

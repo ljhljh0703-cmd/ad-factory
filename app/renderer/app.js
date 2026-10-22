@@ -163,5 +163,9 @@ function go(tab) {
   const info = await window.adf.info(); ROOT = info.root; $('#info').textContent = `엔진 ${info.root}`;
   const ps = await call(['pipelines'], true); if (ps) $('#pipeSel').innerHTML = Object.entries(ps).map(([k, v]) => `<option value="${esc(k)}" title="${esc(v)}">${esc(k)}</option>`).join('');
   load();
-  setInterval(() => { if (!document.hidden) load(); }, 15000);
+  // 입력 중이면 자동 새로 고침을 건너뛴다(다시 그리면 적던 이유·이름이 지워짐)
+  const typing = () => { const a = document.activeElement; if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return true;
+    return [...document.querySelectorAll('[data-why],[data-who],[data-rules],[data-approver],[data-planrun]')].some((e) => e.value.trim())
+      || [...document.querySelectorAll('[data-seen]')].some((e) => e.checked); };
+  setInterval(() => { if (!document.hidden && !typing()) load(); }, 15000);
 })();
