@@ -16,6 +16,7 @@ on:
       - "judge/quality.json"
       - "ua/experiment.json"
       - "engine/**"
+      - ".github/workflows/board-data.yml"
   workflow_dispatch:
 permissions:
   contents: write
@@ -42,6 +43,7 @@ jobs:
           mkdir -p /tmp/out && cp board/data.json board/data.js /tmp/out/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -- .   # 내보내기가 바꾼 main 쪽 사본은 버린다(/tmp/out 에 옮겨 둠)
           git switch --orphan board-data-build
           git rm -rf --quiet . || true
           mkdir -p board && cp /tmp/out/* board/
