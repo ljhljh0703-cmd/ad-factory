@@ -18,4 +18,7 @@ for r in d["심사_이력"]:                                                    
 ids = [i["id"] for g in d["생성분"] for i in g["소재"]]
 assert len(ids) == len(set(ids))
 assert open(os.path.join(tmp, "data.js"), encoding="utf-8").read().startswith("window.ADF_BOARD = ")
+for a in d["광고"]:                                                            # 광고 → 대본·심사로 따라갈 수 있음, 게시 주소는 빠짐
+    assert "소재" in a and "심사_회차" in a and "공개" in a, a["id"]
+assert "youtube.com/shorts" not in s
 shutil.rmtree(tmp); print("통과")

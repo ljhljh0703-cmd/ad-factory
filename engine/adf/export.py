@@ -122,8 +122,13 @@ def ads(allowed):
         r = json.load(open(f, encoding="utf-8"))
         post = r.get("글") or {}
         if post.get("게임", "jelly-panic") not in allowed: continue
+        pub = r.get("게시") or {}
+        # 광고 하나를 대본·심사까지 따라가는 칸(소재·심사_회차)과 다음 할 일을 정하는 칸(공개·내림_이유).
+        # 게시 주소는 넣지 않는다: 일부 공개 영상 주소가 공개 화면에 실리면 전체 공개와 같아진다.
         out.append({"id": r["id"], "광고": r["광고"], "채널": r.get("채널"), "제목": post.get("제목"), "글": post.get("글"),
-                    "점검": r.get("점검"), "상태": r.get("상태"), "승인됨": bool(r.get("승인"))})
+                    "점검": r.get("점검"), "상태": r.get("상태"), "승인됨": bool(r.get("승인")),
+                    "소재": r.get("소재"), "심사_회차": r.get("심사_회차"), "요청_때": r.get("요청_때"),
+                    "공개": pub.get("공개"), "내림_이유": (r.get("내림") or {}).get("이유")})
     return out
 
 
