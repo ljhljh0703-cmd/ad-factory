@@ -1,7 +1,12 @@
 // 게임이 sendBeacon 으로 보낸 묶음 하나를 Blob 파일 하나로 남긴다: events/YYYY-MM-DD/<시각>-<무작위>.jsonl
 import { put } from '@vercel/blob';
 import { parse } from './_clean.js';
-const ORIGINS = ['https://ljhljh0703-cmd.github.io'];
+// 허용 주소: 공개 페이지 + 토스 미니앱(실서비스·콘솔 QR 테스트). 앱 이름이 바뀌면 설정 ALLOW_ORIGIN(쉼표로 구분)만 고친다.
+const ORIGINS = (process.env.ALLOW_ORIGIN || [
+  'https://ljhljh0703-cmd.github.io',
+  'https://jelly-panic.apps.tossmini.com',
+  'https://jelly-panic.private-apps.tossmini.com',
+].join(',')).split(',').map((s) => s.trim()).filter(Boolean);
 export default async function handler(req, res) {
   const origin = req.headers.origin;
   res.setHeader('Access-Control-Allow-Origin', ORIGINS.includes(origin) ? origin : ORIGINS[0]);

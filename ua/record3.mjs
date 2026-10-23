@@ -26,7 +26,7 @@ await ctx.addInitScript(() => {
   window.AudioContext = FakeAC; window.webkitAudioContext = FakeAC;
 });
 const p = await ctx.newPage();
-await p.goto(`https://ljhljh0703-cmd.github.io/jelly-panic/?seed=${SEED}${MODE !== 'classic' ? '' : ''}`, { waitUntil: 'networkidle' });
+await p.goto(`https://ljhljh0703-cmd.github.io/jelly-panic/?seed=${SEED}&notrack${MODE !== 'classic' ? '' : ''}`, { waitUntil: 'networkidle' });
 await p.waitForTimeout(800);
 await p.evaluate(({ seed, mode, policy }) => {
   eval(policy + ';window.botPlan=botPlan;window.summarize=summarize;');
