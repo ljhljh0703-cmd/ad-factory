@@ -26,5 +26,5 @@ const B = await run('?seed=71&notrack');
 console.log('notrack off', B.ev.off, 'events', B.ev.events.length);
 const ok = types.join(',') === 'start,first_move,end,restart,start' && A.ev.events[0].src === 'tiktok' && A.ev.events[0].ad === 'A1-flip' && A.ev.events[0].seed === 71
   && A.ev.events[4].seed === null && A.net.length === 0 && B.ev.off === true && B.ev.events.length === 0
-  && keys.every(k => ['v','sid','n','sec','type','src','ad','mode','seed','after','cause','score','placements','rescued','prev'].includes(k));
+  && keys.every(k => ['v','sid','did','ab','ver','n','sec','type','src','ad','mode','stage','day','seed','after','cause','score','placements','rescued','prev'].includes(k));
 console.log(ok ? '통과' : '실패'); await b.close(); process.exit(ok ? 0 : 1);
