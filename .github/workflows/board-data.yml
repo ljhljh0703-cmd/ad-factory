@@ -1,0 +1,51 @@
+# 기록판 자료 자동 내보내기
+# 심사·생성·게시 기록이 main 에 올라오면 시험을 돌리고 공개용 묶음을 다시 만들어 board-data 가지에 둔다.
+# main 에는 봇 커밋을 남기지 않는다(맥 앱이 올릴 때 부딪히지 않게). 기록판 화면은 이 가지의 data.json 을 먼저 읽는다.
+name: board-data
+on:
+  push:
+    branches: [main]
+    paths:
+      - "judge/runs/**"
+      - "generator/runs/**"
+      - "runs/**"
+      - "adapters/**"
+      - "eval/**"
+      - "CRITERIA.md"
+      - "board/notes.json"
+      - "judge/quality.json"
+      - "ua/experiment.json"
+      - "engine/**"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: board-data
+  cancel-in-progress: true
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 시험
+        run: |
+          cd engine
+          for t in tests/test_*.py; do echo "== $t"; python3 "$t"; done
+      - name: 내보내기
+        run: cd engine && python3 -m adf export
+      - name: board-data 가지에 올리기
+        run: |
+          set -e
+          mkdir -p /tmp/out && cp board/data.json board/data.js /tmp/out/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch --orphan board-data-build
+          git rm -rf --quiet . || true
+          mkdir -p board && cp /tmp/out/* board/
+          printf '기록판 자료만 두는 가지. main 의 %s 에서 자동으로 만든다. 손으로 고치지 않는다.\n' "${GITHUB_SHA::7}" > README.md
+          git add board README.md
+          git commit -q -m "기록판 자료 (main ${GITHUB_SHA::7})"
+          git push -f origin HEAD:board-data

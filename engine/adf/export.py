@@ -4,7 +4,7 @@
 넣지 않는 것: 승인한 사람 이름, 처리자 이름, 열쇠·토큰, 채널 계정, 게시가 허락되지 않은 게임의 소재.
 """
 import os, json, glob, re, datetime
-from . import paths
+from . import paths, quality, experiment
 
 FORMAT = "adf-board/1"
 
@@ -132,17 +132,29 @@ def ads(allowed):
     return out
 
 
+def last_record_time(data):
+    """묶음에 들어간 기록 중 가장 늦은 때. 화면은 이 값과 내보낸 때를 같이 보여 준다."""
+    ts = [r.get("때") for r in data["심사_이력"]] + [r.get("때") for r in data["회귀"]] + [a.get("요청_때") for a in data["광고"]]
+    ts += [l.get("때") for l in _lines(paths.p("runs", "publish", "audit.jsonl"))]
+    ts = [t for t in ts if t]
+    return max(ts) if ts else None
+
+
 def build(out_dir=None):
     from . import publish
     out_dir = out_dir or paths.p("board")
     os.makedirs(out_dir, exist_ok=True)
     notes = _load(os.path.join(out_dir, "notes.json")) or {}
     gs = games(); allowed = {k for k, v in gs.items() if v["게시_가능"]}
-    data = {"판": FORMAT, "만든_때": datetime.datetime.now().isoformat(timespec="seconds"),
+    kst = datetime.timezone(datetime.timedelta(hours=9))  # 맥·클라우드·CI 어디서 돌려도 한국 시각으로
+    data = {"판": FORMAT, "만든_때": datetime.datetime.now(kst).isoformat(timespec="seconds"),
             "게임": [gs[k] for k in sorted(allowed)], "기준표": criteria(),
             "심사_이력": judge_history(notes.get("심사", {}), allowed, set(notes.get("다시_씀", []))), "회귀": regress_history(),
             "생성분": generated(allowed), "사람_검토": reviews(), "광고": ads(allowed),
             "감사": publish.verify_audit()}
+    data["심사_품질"] = quality.build(allowed, data["생성분"], set(notes.get("다시_씀", [])), data["사람_검토"])
+    data["성과"] = experiment.build([a for a in data["광고"] if a["상태"] != "내림"])
+    data["기록_마지막_때"] = last_record_time(data)
     s = json.dumps(data, ensure_ascii=False, indent=1)
     for bad in ("EXPORT_KEY", "TOKEN", "처리자", "누가"):
         assert bad not in s, f"공개용 묶음에 넣으면 안 되는 칸: {bad}"
