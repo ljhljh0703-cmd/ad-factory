@@ -4,8 +4,8 @@
 import http from 'http'; import fs from 'fs'; import path from 'path';
 const PORT = +process.argv[2] || 8787, DIR = process.argv[3] || path.join(path.dirname(new URL(import.meta.url).pathname), 'data');
 const KEYS = { v: 'n', sid: 's', did: 's', ab: 's', ver: 's', n: 'n', sec: 'n', type: 's', src: 's', ad: 's', mode: 's', stage: 'n', day: 'n', seed: 'n', after: 'n', cause: 's', score: 'n', placements: 'n', rescued: 'n', prev: 's' };
-const TYPES = new Set(['start', 'first_move', 'end', 'restart', 'leave']);
-const ORIGINS = (process.env.ALLOW_ORIGIN || 'https://ljhljh0703-cmd.github.io,null').split(',');
+const TYPES = new Set(['start', 'first_move', 'end', 'restart', 'leave', 'share']);
+const ORIGINS = (process.env.ALLOW_ORIGIN || 'https://ljhljh0703-cmd.github.io,https://jelly-panic.apps.tossmini.com,https://jelly-panic.private-apps.tossmini.com,null').split(',');
 export function clean(e) {
   if (!e || typeof e !== 'object' || !TYPES.has(e.type)) return null;
   const o = {};

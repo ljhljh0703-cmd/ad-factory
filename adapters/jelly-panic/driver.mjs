@@ -2,7 +2,7 @@
 // 수는 페이지 안 그림자 판(게임 코어 window.CORE + 봇 정책)에서 고르고, 둔 뒤 화면 점수와 그림자 점수를 맞춰 본다.
 import fs from 'fs';
 const policy = fs.readFileSync(new URL('../../ua/policy.js', import.meta.url), 'utf8').replace(/if \(typeof module[^\n]*\n/, '');
-export const url = (seed) => `https://ljhljh0703-cmd.github.io/jelly-panic/?seed=${seed}`;
+export const url = (seed) => `https://ljhljh0703-cmd.github.io/jelly-panic/?seed=${seed}&notrack`;
 export async function boot(T) {
   const p = T.page; await p.waitForTimeout(800);
   await p.evaluate(({ seed, mode, policy }) => {
